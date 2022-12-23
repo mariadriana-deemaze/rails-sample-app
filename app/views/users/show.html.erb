@@ -1,0 +1,11 @@
+<% provide(:title, @user.name) %>
+
+<div class="flex flex-row gap-8">
+    <aside class="w-64" aria-label="Sidebar">
+        <h1>
+            <%= gravatar_for @user, size: 120 %>
+            <%= @user.email %>
+        </h1>
+    </aside>
+    content here
+</div>
