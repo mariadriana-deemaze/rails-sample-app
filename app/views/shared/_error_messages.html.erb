@@ -1,6 +1,6 @@
 
  <% if errors.any? %>
-        <div class="banner banner-alert">
+        <div class="banner banner-danger">
         <p><b>The form contains <%= pluralize(errors.count, "error") %></b></p>
         <ul class="list-disc">
             <% errors.each do |msg| %>

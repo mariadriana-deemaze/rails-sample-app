@@ -23,8 +23,12 @@
   @apply p-4 mb-4 text-sm rounded-lg;
 }
 
-.banner-alert {
+.banner-danger {
   @apply text-red-700 bg-red-100 dark:bg-red-200 dark:text-red-800;
+}
+
+.banner-success {
+  @apply text-green-500 bg-green-100 dark:bg-green-200 dark:text-green-600;
 }
 
 /* FORM LABEL */
