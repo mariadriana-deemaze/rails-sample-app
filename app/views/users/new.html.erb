@@ -20,6 +20,9 @@
       <%= f.text_field :password_confirmation, type:"password", class: "form-input" %>
         
       <%= f.submit "Create account", class:"primary-button" %>
+
+      <p>Already have an account? <%= link_to "Login now!", login_path, :class => "underline underline-offset-1 text-blue-600" %></p>
+      
     <% end %>
 </div>
 

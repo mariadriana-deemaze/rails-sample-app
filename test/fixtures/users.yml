@@ -1,0 +1,4 @@
+adriana:
+  name: Maria Adriana
+  email: maria.adriana.cardoso@deemaze.com
+  password_digest: <%= User.digest('password') %>
