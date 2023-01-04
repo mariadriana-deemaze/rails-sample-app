@@ -29,9 +29,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     # and assert user count is changed by one increment
     assert_difference "User.count", 1 do
       post users_path, params: { user: {  name: Faker::Name.name,
-        email: Faker::Internet.safe_email,
-        password: "foobar",
-        password_confirmation:"foobar" } }
+                                          email: Faker::Internet.safe_email,
+                                          password: "foobar",
+                                          password_confirmation:"foobar" } }
     end
 
     # test follows to next page

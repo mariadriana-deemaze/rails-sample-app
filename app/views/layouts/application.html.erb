@@ -14,10 +14,12 @@
 
   <body class="flex flex-col justify-between">
     <%= render 'layouts/header' %>
-    <main class="flex flex-col gap-2 container mx-auto mt-28 px-5 h-[calc(100vh_-_350px)] overflow-auto items-start">
-      <%= render 'shared/flash_messages' %>
-      <%= yield %>
-      <%= debug(params) if Rails.env.development? %>
+    <main class="flex flex-col gap-2 min-h-[calc(100vh_-_260px)] overflow-auto items-start">
+      <div class="container mx-auto mt-28 px-5">
+        <%= render 'shared/flash_messages' %>
+        <%= yield %>
+        <%= debug(params) if Rails.env.development? %>
+      </div>
     </main>
     <%= render 'layouts/footer' %>
   </body>

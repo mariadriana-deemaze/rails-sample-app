@@ -1,0 +1,45 @@
+<% provide(:title, @user.name) %>
+
+<div class="flex flex-row gap-1">
+    <%= form_with(model: @user, local:true, class: "flex flex-row gap-4", data: { turbo: false } ) do |f| %>
+        <aside class="w-64" aria-label="Sidebar">
+             <%= gravatar_for @user, size: 120, classes: "rounded-lg" %>
+             <a href="https://gravatar.com/emails" 
+                class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400" 
+                target="_blank"
+                rel="nonopener"
+             >
+                Change picture
+             </a>
+        </aside>
+        <div class="flex flex-col gap-4 w-full border border-gray-200 bg-gray-50 p-5 rounded-md">
+            <h5>Update your user profile</h5>
+                <div class="flex flex-col gap-4 w-full">
+                    <%= render 'shared/error_messages', errors: @user.errors.full_messages %>
+                    <div class="flex flex-row gap-4 w-full">
+                        <div class="relative z-0 w-full mb-6 group">
+                            <%= f.label :name, class: "form-label" %>
+                            <%= f.text_field :name, class: "form-input peer" %>
+                        </div>
+                        <div class="relative z-0 w-full mb-6 group">
+                            <%= f.label :email, class: "form-label" %>
+                            <%= f.text_field :email, class: "form-input peer" %>
+                        </div>
+                    </div>
+                    <div class="flex flex-row gap-4 w-full">
+                        <div class="relative z-0 w-full mb-6 group">
+                            <%= f.label :password, class: "form-label" %>
+                            <%= f.text_field :password, class: "form-input peer" %>
+                        </div>
+                        <div class="relative z-0 w-full mb-6 group">
+                            <%= f.label :password_confirmation, class: "form-label" %>
+                            <%= f.text_field :password_confirmation, class: "form-input peer" %>
+                        </div>
+                    </div>
+                </div>
+
+            <%= f.submit "Save changes", class:"primary-button" %>
+            </div>
+        </div>
+    <% end %>
+</div>
