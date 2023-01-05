@@ -1,0 +1,31 @@
+<% provide(:title, 'Reset password') %>
+
+<h1>Reset password</h1>
+
+<div class="flex flex-col w-[400px] border border-gray-200 bg-gray-50 p-5 rounded-md m-auto">
+
+    <%= render 'shared/error_messages', errors: @user.errors.full_messages %>
+
+    <%= form_with(model: @user,
+                  url: password_reset_path(params[:id]), 
+                  local: true, 
+                  class: "flex flex-col gap-4", 
+                  data: { turbo: false } ) do |f| %>
+
+      <%= hidden_field_tag :email, @user.email %>
+
+      <div class="relative z-0 w-full mb-6 group">
+          <%= f.password_field :password, class: "form-input peer" %>
+          <%= f.label :password, class: "form-label" %>
+      </div>
+
+      <div class="relative z-0 w-full mb-6 group">
+          <%= f.password_field :password_confirmation, class: "form-input peer" %>
+          <%= f.label :password_confirmation, class: "form-label" %>
+      </div>
+        
+      <%= f.submit "Update password", class:"primary-button" %>
+      
+    <% end %>
+</div>
+
