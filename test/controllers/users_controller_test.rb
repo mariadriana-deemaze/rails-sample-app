@@ -67,5 +67,42 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     
     # assert that user is correctly re-directed
     assert_redirected_to login_url
+  end 
+
+  test "should not allow the admin attribute to be updated via patch" do
+    # login user account
+    log_in_as(@other_user)
+
+    # verify is the user we are testing does not have the admin role
+    assert_not @other_user.admin?
+
+    # try to update user data with the admin property by patch
+    patch user_path(@user), params: { user: { password: "password",
+                                              password_confirmation: "password", 
+                                              admin: true }} 
+    
+    # verify if unchanged
+    assert_not @other_user.admin?
+  end
+
+  test "should redirect destroy if not logged in" do
+    # assert for difference
+    assert_no_difference "User.count" do
+      delete user_path(@user)
+    end
+    # assert redirect to login page
+    assert_redirected_to login_url
+  end
+
+  test "should redirect destroy if logged in as non-admin user" do
+    # login as non admin user
+    log_in_as(@other_user)
+    
+    # assert for difference
+    assert_no_difference "User.count" do
+      delete user_path(@user)
+    end
+    # assert redirect to homepage
+    assert_redirected_to root_url
   end
 end

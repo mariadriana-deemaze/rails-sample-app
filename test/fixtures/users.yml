@@ -2,6 +2,7 @@ adriana:
   name: Maria Adriana
   email: maria.adriana.cardoso@deemaze.com
   password_digest: <%= User.digest('password') %>
+  admin: true
 
 some_other:
   name: Some other person

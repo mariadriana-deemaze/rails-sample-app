@@ -1,7 +1,8 @@
 User.create!( name: "Maria Adriana",
               email: "mariaadriana15@gmail.com",
               password:"123456",
-              password_confirmation:"123456")
+              password_confirmation:"123456",
+              admin: true )
 
 
 99.times do |n|

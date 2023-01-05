@@ -1,4 +1,4 @@
-<div class="w-full sm:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 hover:-translate-y-4 transition-all ease-in-out duration-300">
+<div class="w-full sm:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 hover:-translate-y-2 transition-all ease-in-out duration-300">
     <div class="flex justify-end px-4 pt-4">
         <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
             <span class="sr-only">Open dropdown</span>
@@ -17,9 +17,11 @@
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
                 </li>
 
-                <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                </li>
+                <% if current_user.admin? && !current_user?(user) %>
+                    <li>
+                        <%= link_to "Delete", user, method: :delete, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, :class => "block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"%>
+                    </li>
+                <% end %>
             </ul>
         </div>
     </div>
