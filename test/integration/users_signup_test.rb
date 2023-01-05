@@ -1,7 +1,12 @@
 require "test_helper"
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
-  test "Invalid signup information" do
+
+  def setup 
+    ActionMailer::Base.deliveries.clear
+  end
+
+  test "invalid signup information" do
     # go to signup page
     get signup_path
 
@@ -21,7 +26,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select 'div.banner.banner-danger'
   end
 
-  test "Valid signup" do
+  test "valid signup information with account activation" do
     # go to signup page
     get signup_path
 
@@ -33,7 +38,29 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                           password: "foobar",
                                           password_confirmation:"foobar" } }
     end
+    
+    # check if activation email was sent
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    
+    # check if created user is cannot login due to account not being activated
+    user = assigns(:user)
+    assert_not user.activated?
+    log_in_as(user)
+    assert_not is_logged_in?
 
+    # Invalid activation token
+    #get edit_account_activation_path("invalid token", email: user.email)
+    #assert_not is_logged_in?
+
+    # valid token and invalid email
+    #get edit_account_activation_path(user.activation_token, email: 'wrong')
+    #assert_not is_logged_in?
+
+    # valid token and valid email
+    # and assert if user account attribute is correctly truthy
+    get edit_account_activation_path(user.activation_token, email: user.email)
+    assert user.reload.activated?
+    
     # test follows to next page
     follow_redirect!
 

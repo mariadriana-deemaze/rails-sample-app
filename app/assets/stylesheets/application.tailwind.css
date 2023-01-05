@@ -65,6 +65,10 @@ p {
   @apply text-green-500 bg-green-100 dark:bg-green-200 dark:text-green-600;
 }
 
+.banner-info {
+  @apply text-yellow-500 bg-yellow-100 dark:bg-yellow-200 dark:text-yellow-600;
+}
+
 /* FORM */
 
 .form-input {
