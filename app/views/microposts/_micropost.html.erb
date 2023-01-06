@@ -28,8 +28,8 @@
                 <p class="text-sm text-gray-700 dark:text-gray-400">
                     <%= micropost.content %>
                 </p>
-                <!-- TODO: Would be cool to find a way to do a modal click view to maximize the image to its full potential -->
-                <%= image_tag micropost.image, :class => "max-w-[400px]" if micropost.image.attached? %>
+                <!-- TODO: Would be cool to find a way to do a modal click view w/ stimulus(not jquery please) to maximize the image to its full potential -->
+                <%= image_tag micropost.display_image, :class => "max-w-[400px]" if micropost.image.attached? %>
             </div>
             <span class="text-xs text-gray-400 dark:text-gray-400">
                 Posted <%= time_ago_in_words(micropost.created_at) %> ago.
