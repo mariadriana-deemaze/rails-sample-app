@@ -10,7 +10,7 @@
 }
 
 .debug_dump {
-  @apply box-border clear-both float-left w-full mt-11 border border-b-neutral-200 bg-slate-100 rounded-md p-3;
+  @apply fixed bottom-4 box-border left-2 right-2 border border-b-neutral-200 bg-slate-100 rounded-md p-3;
 }
 
 .primary-button {
@@ -54,7 +54,7 @@ p {
 /* BANNER */
 
 .banner {
-  @apply p-4 mb-4 text-sm rounded-lg;
+  @apply p-4 mb-4 text-sm rounded-lg w-full;
 }
 
 .banner-danger {
@@ -73,6 +73,10 @@ p {
 
 .form-input {
   @apply block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600;
+}
+
+.field_with_errors {
+  @apply w-full
 }
 
 .field_with_errors > .form-input{

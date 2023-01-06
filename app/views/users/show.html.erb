@@ -1,11 +1,48 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, "#{@user.name}'s profile") %>
 
-<div class="flex flex-row gap-8">
-    <aside class="w-64" aria-label="Sidebar">
-        <h1>
-            <%= gravatar_for @user, size: 120, classes: "rounded-lg" %>
-            <%= @user.email %>
-        </h1>
-    </aside>
-    content here
-</div>
+<div class="flex flex-col overflow-auto h-screen">
+    <div class="py-3 bg-white border-b border-gray-200">
+        <h3 class="flex gap-4">
+            <%= @user.name %>'s timeline 
+            <% if @user.microposts.count > 0 %>
+                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300 self-center">
+                    <%= @user.microposts.count %>
+                </span>
+            <% end %>
+        </h3>
+    </div>
+    <div class="flex flex-row gap-6">
+        <aside class="w-80 border-r border-gray-200 relative" aria-label="Sidebar">
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 mt-3 mr-10 sticky top-3">
+                <a href="#">
+                    <%= gravatar_for @user, size: 280, classes: "rounded-t-lg" %>
+                </a>
+                <div class="p-5">
+                    <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <%= @user.name %>
+                    </h5>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        <%= @user.email %>
+                    </p>
+                    <%= button_to "Go to settings", "!#",
+                        :class => "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800", 
+                        :method => :get %>
+                </div>
+            </div>
+
+        </aside>
+        <div class="w-full">
+            <% if @user.microposts.any? %>
+                <div class="flex flex-col gap-4 w-full">
+                    <%= render @microposts %>
+                </div>
+
+                <div class="my-4">
+                    <%= will_paginate @microposts %>
+                </div>
+            <% else %>
+                <h3>Nothing to see here...</h3>
+            <% end %>
+        </div>
+    </div>
+ </div>

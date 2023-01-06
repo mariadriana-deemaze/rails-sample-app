@@ -15,7 +15,9 @@
         <div class="flex flex-col gap-4 w-full border border-gray-200 bg-gray-50 p-5 rounded-md">
             <h5>Update your user profile</h5>
                 <div class="flex flex-col gap-4 w-full">
-                    <%= render 'shared/error_messages', errors: @user.errors.full_messages %>
+
+                    <%= render 'shared/error_messages', object: f.object %>
+
                     <div class="flex flex-row gap-4 w-full">
                         <div class="relative z-0 w-full mb-6 group">
                             <%= f.label :name, class: "form-label" %>

@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
     has_secure_password
 
+    has_many :microposts, dependent: :destroy
+
     def remember 
         self.remember_token = User.new_token
         update_attribute(:remember_digest, User.digest(remember_token))
@@ -54,6 +56,10 @@ class User < ApplicationRecord
 
     def password_reset_expired?
         reset_sent_at < 2.hours.ago 
+    end
+
+    def feed 
+        Micropost.where("user_id", id)
     end
 
     private

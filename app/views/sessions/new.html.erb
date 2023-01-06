@@ -5,7 +5,7 @@
 <div class="flex flex-col w-[400px] border border-gray-200 bg-gray-50 p-5 rounded-md m-auto">
     <%= form_with(url: login_path, scope: :session, local: true, class: "flex flex-col gap-4", data: { turbo: false } ) do |f| %>
 
-      <%#= render 'shared/error_messages', errors: @user.errors.full_messages %>
+      <%= render 'shared/error_messages', object: f.object %>
    
       <div class="relative z-0 w-full mb-6 group">
           <%= f.text_field :email, class: "form-input peer" %>

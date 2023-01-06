@@ -1,0 +1,23 @@
+<div class="flex flex-col items-center pb-10 gap-4">
+    <%= gravatar_for current_user, size: 100, classes:"rounded-md" %>
+
+
+    <% if current_user.microposts.count > 0 %>
+        <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300 self-center">
+            <%= "#{current_user.microposts.count} posts" %>
+        </span>
+    <% end %>
+
+    <div class="flex flex-col gap-1 items-center">
+                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                    <%= current_user.name %>
+                </h5>
+                <span class="text-sm text-gray-500 dark:text-gray-400">
+                    <%= current_user.email %>
+                </span>
+    </div>
+
+    <%= button_to "Visit profile", edit_user_path(current_user),
+        :class => "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800", 
+        :method => :get %>
+</div>

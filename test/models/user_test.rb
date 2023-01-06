@@ -2,7 +2,10 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(name: Faker::Name.name, email: Faker::Internet.safe_email, password: "testing", password_confirmation: "testing")
+    @user = User.new( name: Faker::Name.name, 
+                      email: Faker::Internet.safe_email, 
+                      password: "password", 
+                      password_confirmation: "password" )
 
     @empty_string = " " * 6
     @password_min_length = "a" * 5
@@ -87,5 +90,13 @@ class UserTest < ActiveSupport::TestCase
 
   test "authenticated? Should return false for a user with a nil digest" do
     assert_not @user.authenticated?(:remember, '') 
+  end
+
+  test "upon user deletion, the dependent posts should be destroyed" do 
+    @user.save
+    @user.microposts.create!( content: Faker::Quote.famous_last_words )
+    assert_difference "Micropost.count", -1 do
+      @user.destroy
+    end
   end
 end

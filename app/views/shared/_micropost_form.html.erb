@@ -1,0 +1,19 @@
+<div class="flex flex-col w-full border border-gray-200 bg-gray-50 p-5 rounded-md self-start">
+    <%= form_with(model: @micropost, local: true, class: "flex flex-col gap-4 w-full items-start content-start", data: { turbo: false } ) do |f| %>
+
+      <%= render 'shared/error_messages', object: f.object %>
+   
+      <%= f.text_area :content, class: "form-input peer w-full", placeholder: "What are you thinking about? 💬" %>
+
+      <label class="text-xs text-gray-400 font-light italic">Max. 140 characters</label>
+
+      <div class="relative z-0 w-full mb-6 group">
+          <%= f.file_field :image, class: "form-input peer", accept: "image/jpeg, image/gif, image/png"%>
+          <%= f.label :image, class: "form-label" %>
+      </div>
+
+      <%= f.submit "Post now", class:"primary-button" %>
+
+    <% end %>
+</div>
+

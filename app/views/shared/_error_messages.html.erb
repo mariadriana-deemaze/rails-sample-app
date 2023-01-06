@@ -1,11 +1,10 @@
-
- <% if errors.any? %>
-        <div class="banner banner-danger">
-        <p><b>The form contains <%= pluralize(errors.count, "error") %></b></p>
+<% if !object.nil? && object.errors.any? %>
+    <div class="banner banner-danger">
+        <p><b>The form contains <%= pluralize(object.errors.count, "error") %></b></p>
         <ul class="list-disc">
-            <% errors.each do |msg| %>
+            <% object.errors.full_messages.each do |msg| %>
             <li class="text-xs"><%= msg %></li>
             <% end %>
         </ul>
-        </div>
-    <% end %>
+    </div>
+<% end %>

@@ -1,0 +1,16 @@
+dummy_post:
+  content: <%= Faker::Quote.famous_last_words %>
+  created_at: <%= 10.minutes.ago %>
+  user: adriana
+
+most_recent:
+  content: <%= Faker::Quote.famous_last_words %>
+  created_at: <%= Time.zone.now %>
+  user: adriana
+
+<% 30.times do |n| %>
+micropost_<%= n %>:
+  content: <%= Faker::Quote.famous_last_words %>
+  created_at: <%= 30.days.ago %>
+  user: adriana
+<% end %>

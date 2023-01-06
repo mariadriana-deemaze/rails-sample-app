@@ -15,7 +15,7 @@
   <body class="flex flex-col justify-between">
     <%= render 'layouts/header' %>
     <main class="flex flex-col gap-2 min-h-[calc(100vh_-_260px)] overflow-auto items-start">
-      <div class="container mx-auto mt-28 px-5">
+      <div class="container mx-auto mt-[92px] px-5">
         <%= render 'shared/flash_messages' %>
         <%= yield %>
         <%= debug(params) if Rails.env.development? %>

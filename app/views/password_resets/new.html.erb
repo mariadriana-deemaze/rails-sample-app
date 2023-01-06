@@ -4,20 +4,20 @@
 
 <div class="flex flex-col w-[400px] border border-gray-200 bg-gray-50 p-5 rounded-md m-auto">
 
-    <%#= render 'shared/error_messages', errors: @user.errors.full_messages %>
-
     <%= form_with(url: password_resets_path, 
                   scope: :password_reset, 
                   local: true, 
                   class: "flex flex-col gap-4", 
                   data: { turbo: false } ) do |f| %>
+                  
+        <%= render 'shared/error_messages', object: f.object %>
 
-      <div class="relative z-0 w-full mb-6 group">
-          <%= f.email_field :email, class: "form-input peer" %>
-          <%= f.label :email, class: "form-label" %>
-      </div>
+        <div class="relative z-0 w-full mb-6 group">
+            <%= f.email_field :email, class: "form-input peer" %>
+            <%= f.label :email, class: "form-label" %>
+        </div>
         
-      <%= f.submit "Login to account", class:"primary-button" %>
+        <%= f.submit "Login to account", class:"primary-button" %>
       
     <% end %>
 </div>
