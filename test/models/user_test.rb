@@ -99,4 +99,50 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+
+  test "should follow and unfollow a user" do 
+    adriana     = users(:adriana)
+    some_other  = users(:some_other)
+
+    # check first if not following
+    assert_not adriana.following?(some_other)
+
+    # follow
+    adriana.follow(some_other)
+
+    # assert that follow went through ok
+    assert adriana.following?(some_other)
+
+    # check if the account followed has the followers count updated
+    assert some_other.followers.include?(adriana)
+
+    # now unfollow
+    adriana.unfollow(some_other)
+
+    # assert that the unfollow went through
+    assert_not adriana.following?(some_other)
+  end
+
+  # validate feed content
+
+  test "feed should have the right posts" do 
+    adriana     = users(:adriana)
+    some_other  = users(:some_other)
+    random      = users(:user_1)
+
+    # Posts from followed user
+    random.microposts.each do |post_following|
+      assert adriana.feed.include?(post_following)
+    end
+
+    # Posts from self
+    adriana.microposts.each do |post_self|
+      assert adriana.feed.include?(post_self)
+    end
+
+    # Posts from unfollowed user
+    some_other.microposts.each do |post_unfollowed|
+      assert_not adriana.feed.include?(post_unfollowed)
+    end
+  end
 end

@@ -22,9 +22,8 @@
 
         <div class="flex flex-col gap-1 items-start">
             <div>
-                <h5 class="text-base font-medium text-gray-900 dark:text-white">
-                    <%= micropost.user.name %>
-                </h5>
+                <%= link_to micropost.user.name, user_path(micropost.user), :class => "text-base font-medium text-gray-900 dark:text-white" %>
+               
                 <p class="text-sm text-gray-700 dark:text-gray-400">
                     <%= micropost.content %>
                 </p>

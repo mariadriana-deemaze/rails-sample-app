@@ -1,0 +1,14 @@
+<div class="flex flex-col gap-4 relative overflow-auto h-screen">
+    <%= render 'layouts/page_header', title: "Welcome back #{current_user.name}!", description: "Your digest" %>
+    <div class="flex flex-row gap-4">
+        <aside class="w-96 mt-3 border-r border-gray-200" aria-label="Sidebar">
+            <div class="flex flex-col gap-8 mr-6 sticky top-6 left-0">
+                <%= render "shared/user_info" %>
+                <%= render "shared/micropost_form" %>
+            </div>
+        </aside>
+        <div class="flex flex-col gap-4 w-full p-5">
+            <%= render 'shared/feed' %>
+        </div>
+    </div>
+</div>

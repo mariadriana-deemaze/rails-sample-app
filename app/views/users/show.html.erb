@@ -1,7 +1,7 @@
 <% provide(:title, "#{@user.name}'s profile") %>
 
 <div class="flex flex-col overflow-auto h-screen">
-    <div class="py-3 bg-white border-b border-gray-200">
+    <div class="flex flex-row py-3 bg-white border-b border-gray-200 justify-between">
         <h3 class="flex gap-4">
             <%= @user.name %>'s timeline 
             <% if @user.microposts.count > 0 %>
@@ -10,6 +10,7 @@
                 </span>
             <% end %>
         </h3>
+        <%= render 'follow_form' if logged_in? %>
     </div>
     <div class="flex flex-row gap-6">
         <aside class="w-80 border-r border-gray-200 relative" aria-label="Sidebar">
@@ -17,16 +18,24 @@
                 <a href="#">
                     <%= gravatar_for @user, size: 280, classes: "rounded-t-lg" %>
                 </a>
-                <div class="p-5">
-                    <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        <%= @user.name %>
-                    </h5>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                        <%= @user.email %>
-                    </p>
-                    <%= button_to "Go to settings", "!#",
-                        :class => "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800", 
-                        :method => :get %>
+                <div class="flex flex-col p-5 gap-3">
+                    <div class="flex flex-col gap-1">
+                        <h5 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            <%= @user.name %>
+                        </h5>
+                        <p class="text-sm font-normal text-gray-700 dark:text-gray-400">
+                            <%= @user.email %>
+                        </p>
+                    </div>
+
+                    <%= render "shared/stats" %>
+
+                    <% if current_user?(@user) %>
+                        <%= button_to "Go to settings", edit_user_path(@user),
+                            :class => "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800", 
+                            :method => :get %>
+                    <% end %>
+
                 </div>
             </div>
 
@@ -41,7 +50,7 @@
                     <%= will_paginate @microposts %>
                 </div>
             <% else %>
-                <h3>Nothing to see here...</h3>
+                <h3 class="mt-4">Nothing to see here...</h3>
             <% end %>
         </div>
     </div>

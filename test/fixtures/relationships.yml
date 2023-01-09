@@ -1,0 +1,15 @@
+one: 
+  follower: some_other
+  followed: adriana
+
+two: 
+  follower: adriana
+  followed: user_1
+
+three: 
+  follower: user_1
+  followed: adriana
+
+four: 
+  follower: user_2
+  followed: adriana

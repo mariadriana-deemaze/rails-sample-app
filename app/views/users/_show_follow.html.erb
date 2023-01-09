@@ -1,0 +1,46 @@
+<% provide(:title, @title) %> 
+
+<section class="flex flex-row items-center py-5 justify-between"> 
+    <div class="flex flex-row gap-4 items-center py-5">
+
+        <%= gravatar_for @user, size: 100, classes:"rounded-md" %>
+        <div class="flex flex-col items-start gap-1">
+            <h5>
+                <%= link_to @user.name, user_path(@user), 
+                    :class=> "mb-1 text-xl font-bold text-gray-900 dark:text-white" %>
+                <% if @user.microposts.count > 0 %>
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300 self-center">
+                        <%= pluralize(current_user.microposts.count, "post") %>
+                    </span>
+                <% end %>
+            </h5>
+
+            <div class="flex flex-col gap-2">
+                <%= render 'shared/stats' %> 
+                <% if @users.any? %>
+                    <div class="flex -space-x-1 overflow-hidden">
+                        <% @users_preview.each do |u_preview| %>
+                            <%= gravatar_for u_preview, size: 50, classes: "inline-block h-6 w-6 rounded-full ring-2 ring-white" %>
+                        <% end %>
+                    </div> 
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div>
+    <%= render "users/follow_form" %>
+    </div>
+</section>
+
+<div class="flex flex-col gap-2">
+    <h5><%= @title %></h5> 
+    
+    <% if @users.any? %>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+            <%= render @users %>
+        </div>
+        <div class="my-4">
+            <%= will_paginate %>
+        </div>
+    <% end %>
+</div>
